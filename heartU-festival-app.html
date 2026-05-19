@@ -1,0 +1,1127 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="theme-color" content="#000000" id="theme-meta">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="❤️U Festival">
+<meta name="description" content="De officiële app van het ❤️U festival – 15 & 16 augustus 2026, Utrecht">
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+<title>❤️U Festival 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sansation:ital,wght@0,300;0,400;0,700;1,300&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+<style>
+:root {
+  --accent: #F03228;
+  --cerulean: #247BA0;
+  --saffron: #E3B505;
+  --bg: #FFFFFF;
+  --bg2: #F5F5F5;
+  --text: #000000;
+  --text2: #444444;
+  --card-bg: #FFFFFF;
+  --card-border: rgba(0,0,0,0.1);
+  --nav-bg: rgba(255,255,255,0.92);
+  --overlay: rgba(255,255,255,0.85);
+  --schedule-line: rgba(0,0,0,0.08);
+}
+[data-theme="dark"] {
+  --bg: #0A0A0A;
+  --bg2: #161616;
+  --text: #FFFFFF;
+  --text2: #AAAAAA;
+  --card-bg: #1A1A1A;
+  --card-border: rgba(255,255,255,0.08);
+  --nav-bg: rgba(10,10,10,0.92);
+  --overlay: rgba(10,10,10,0.85);
+  --schedule-line: rgba(255,255,255,0.08);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html,body{height:100%;overflow:hidden;font-family:'Sansation',sans-serif;background:var(--bg);color:var(--text);transition:background .3s,color .3s}
+a{color:var(--cerulean);text-decoration:none}
+/* APP SHELL */
+#app{display:flex;flex-direction:column;height:100vh;height:100dvh;overflow:hidden}
+/* TOP BAR */
+#topbar{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:12px 16px 8px;
+  background:var(--bg);
+  border-bottom:1px solid var(--card-border);
+  z-index:100;flex-shrink:0;
+}
+#logo{
+  font-family:'Sansation',sans-serif;font-weight:700;font-size:22px;
+  color:var(--text);letter-spacing:-0.5px;
+  display:flex;align-items:center;gap:6px;
+}
+#logo span.heart{color:var(--accent)}
+#topbar-right{display:flex;align-items:center;gap:8px}
+.icon-btn{
+  width:36px;height:36px;border-radius:8px;border:none;
+  background:var(--bg2);cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  color:var(--text);transition:background .2s;font-size:18px;
+}
+.icon-btn:active{transform:scale(0.95)}
+#lang-btn{font-size:16px;font-weight:700;font-family:'Sansation',sans-serif}
+/* CONTENT AREA */
+#content{flex:1;overflow:hidden;position:relative}
+.screen{
+  position:absolute;inset:0;overflow-y:auto;
+  padding:16px;padding-bottom:80px;
+  opacity:0;pointer-events:none;
+  transform:translateY(12px);
+  transition:opacity .3s ease,transform .3s ease;
+}
+.screen.active{opacity:1;pointer-events:auto;transform:translateY(0)}
+/* NAV */
+#nav{
+  position:fixed;bottom:0;left:0;right:0;
+  background:var(--nav-bg);
+  backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  border-top:1px solid var(--card-border);
+  display:flex;z-index:200;
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+.nav-item{
+  flex:1;display:flex;flex-direction:column;align-items:center;
+  gap:2px;padding:10px 4px 8px;
+  border:none;background:transparent;cursor:pointer;
+  color:var(--text2);transition:color .2s;
+}
+.nav-item.active{color:var(--accent)}
+.nav-item .material-icons-round{font-size:22px}
+.nav-item span.label{font-size:10px;font-family:'Sansation',sans-serif;font-weight:300;font-style:italic;text-transform:uppercase;letter-spacing:0.5px}
+/* HOME SCREEN */
+.hero-banner{
+  border-radius:12px;background:var(--text);
+  padding:24px 20px;margin-bottom:16px;
+  position:relative;overflow:hidden;
+}
+.hero-banner::before{
+  content:'';position:absolute;inset:0;
+  background:repeating-linear-gradient(
+    45deg,
+    transparent,transparent 20px,
+    rgba(240,50,40,0.06) 20px,rgba(240,50,40,0.06) 21px
+  );
+}
+.hero-date{
+  font-size:11px;font-weight:300;font-style:italic;
+  color:var(--accent);text-transform:uppercase;letter-spacing:1.5px;
+  margin-bottom:6px;position:relative;
+}
+.hero-title{
+  font-size:32px;font-weight:700;
+  color:#fff;line-height:1.1;
+  position:relative;
+}
+[data-theme="dark"] .hero-title{color:#fff}
+.hero-subtitle{
+  font-size:13px;color:rgba(255,255,255,0.7);
+  margin-top:8px;font-weight:300;font-style:italic;
+  position:relative;
+}
+.hero-badge{
+  display:inline-flex;align-items:center;gap:4px;
+  background:var(--accent);color:#fff;
+  font-size:10px;font-weight:700;
+  padding:4px 10px;border-radius:6px;
+  margin-top:12px;position:relative;letter-spacing:0.5px;
+}
+.section-title{
+  font-size:11px;font-weight:700;
+  color:var(--text2);text-transform:uppercase;letter-spacing:1.5px;
+  margin:20px 0 10px;
+}
+.news-card{
+  background:var(--card-bg);border:1px solid var(--card-border);
+  border-radius:10px;padding:14px 16px;margin-bottom:10px;
+  position:relative;overflow:hidden;
+  transition:transform .15s,box-shadow .15s;
+}
+.news-card:active{transform:scale(0.99)}
+.news-card::before{
+  content:'';position:absolute;left:0;top:0;bottom:0;width:3px;
+}
+.news-card.accent::before{background:var(--accent)}
+.news-card.info::before{background:var(--saffron)}
+.news-card.cerulean::before{background:var(--cerulean)}
+.news-card-tag{
+  font-size:10px;font-weight:700;letter-spacing:0.8px;
+  text-transform:uppercase;margin-bottom:4px;
+}
+.news-card.accent .news-card-tag{color:var(--accent)}
+.news-card.info .news-card-tag{color:var(--saffron)}
+.news-card.cerulean .news-card-tag{color:var(--cerulean)}
+.news-card-title{font-size:15px;font-weight:700;color:var(--text);line-height:1.3}
+.news-card-body{font-size:13px;color:var(--text2);margin-top:4px;line-height:1.5}
+.news-card-time{font-size:11px;color:var(--text2);margin-top:8px;font-style:italic}
+/* INFO SCREEN */
+.info-header{text-align:center;padding:16px 0 24px}
+.info-header h1{font-size:26px;font-weight:700;color:var(--text)}
+.info-header p{font-size:13px;color:var(--text2);margin-top:6px;font-style:italic;font-weight:300}
+.accordion-item{
+  background:var(--card-bg);border:1px solid var(--card-border);
+  border-radius:10px;margin-bottom:8px;overflow:hidden;
+}
+.accordion-btn{
+  width:100%;display:flex;align-items:center;justify-content:space-between;
+  padding:14px 16px;background:transparent;border:none;cursor:pointer;
+  color:var(--text);text-align:left;gap:8px;
+}
+.accordion-btn-title{
+  font-size:15px;font-weight:700;font-family:'Sansation',sans-serif;
+  flex:1;
+}
+.accordion-icon{
+  color:var(--cerulean);font-size:20px;
+  transition:transform .3s;flex-shrink:0;
+}
+.accordion-item.open .accordion-icon{transform:rotate(180deg)}
+.accordion-body{
+  max-height:0;overflow:hidden;
+  transition:max-height .4s ease;
+  padding:0 16px;
+}
+.accordion-item.open .accordion-body{max-height:800px}
+.accordion-body-inner{padding:0 0 16px;font-size:14px;line-height:1.7;color:var(--text2)}
+.accordion-body-inner strong{color:var(--text);font-weight:700}
+.info-chip{
+  display:inline-flex;align-items:center;gap:4px;
+  background:var(--bg2);border-radius:6px;
+  padding:4px 8px;font-size:12px;margin:3px 2px;
+  color:var(--text2);
+}
+.info-chip .material-icons-round{font-size:14px;color:var(--cerulean)}
+/* SCHEDULE SCREEN */
+.schedule-header{padding-bottom:16px}
+.day-tabs{display:flex;gap:8px;margin-bottom:16px}
+.day-tab{
+  flex:1;padding:10px;border-radius:8px;
+  border:1px solid var(--card-border);
+  background:transparent;cursor:pointer;
+  color:var(--text2);font-family:'Sansation',sans-serif;
+  font-size:13px;font-weight:700;transition:all .2s;
+}
+.day-tab.active{background:var(--accent);border-color:var(--accent);color:#fff}
+.stage-filter{
+  display:flex;gap:6px;overflow-x:auto;padding-bottom:4px;
+  scrollbar-width:none;-webkit-overflow-scrolling:touch;
+}
+.stage-filter::-webkit-scrollbar{display:none}
+.stage-chip{
+  flex-shrink:0;padding:6px 14px;border-radius:20px;
+  border:1px solid var(--card-border);
+  background:transparent;cursor:pointer;
+  color:var(--text2);font-family:'Sansation',sans-serif;
+  font-size:12px;font-weight:300;font-style:italic;
+  transition:all .2s;white-space:nowrap;
+}
+.stage-chip.active{border-color:var(--cerulean);color:var(--cerulean);background:rgba(36,123,160,0.08)}
+.schedule-grid{position:relative}
+.time-label{
+  font-size:11px;color:var(--text2);
+  padding:4px 0;font-style:italic;
+  display:flex;align-items:center;gap:8px;
+  font-weight:300;
+}
+.time-label::after{
+  content:'';flex:1;height:1px;
+  background:var(--schedule-line);
+}
+.schedule-slot{
+  background:var(--card-bg);border-radius:10px;
+  padding:12px 14px;margin:4px 0 10px;
+  border-left:3px solid var(--cerulean);
+  border:1px solid var(--card-border);
+  border-left:3px solid var(--cerulean);
+  position:relative;overflow:hidden;
+  transition:transform .15s;
+  cursor:pointer;
+}
+.schedule-slot:active{transform:scale(0.99)}
+.schedule-slot.stage-mainstage{border-left-color:var(--accent)}
+.schedule-slot.stage-b{border-left-color:var(--cerulean)}
+.schedule-slot.stage-c{border-left-color:var(--saffron)}
+.schedule-slot.stage-d{border-left-color:#7B4FBF}
+.slot-time{font-size:11px;color:var(--text2);font-style:italic;margin-bottom:3px}
+.slot-name{font-size:16px;font-weight:700;color:var(--text)}
+.slot-genre{font-size:12px;color:var(--text2);margin-top:2px;font-weight:300;font-style:italic}
+.slot-stage{
+  display:inline-block;font-size:10px;font-weight:700;
+  padding:2px 8px;border-radius:4px;margin-top:6px;
+  text-transform:uppercase;letter-spacing:0.5px;
+}
+.slot-stage.stage-mainstage{background:rgba(240,50,40,0.1);color:var(--accent)}
+.slot-stage.stage-b{background:rgba(36,123,160,0.1);color:var(--cerulean)}
+.slot-stage.stage-c{background:rgba(227,181,5,0.15);color:#B08A00}
+[data-theme="dark"] .slot-stage.stage-c{color:var(--saffron)}
+.slot-stage.stage-d{background:rgba(123,79,191,0.1);color:#7B4FBF}
+/* MAP SCREEN */
+.map-header{padding-bottom:12px}
+.map-container{
+  border-radius:12px;overflow:hidden;
+  background:var(--bg2);border:1px solid var(--card-border);
+  position:relative;height:340px;
+}
+.map-svg-wrapper{width:100%;height:100%;position:relative}
+.map-controls{
+  position:absolute;right:12px;top:12px;
+  display:flex;flex-direction:column;gap:6px;z-index:10;
+}
+.map-btn{
+  width:36px;height:36px;border-radius:8px;
+  background:var(--card-bg);border:1px solid var(--card-border);
+  cursor:pointer;color:var(--text);
+  display:flex;align-items:center;justify-content:center;
+  font-size:18px;box-shadow:0 2px 8px rgba(0,0,0,0.15);
+}
+.legend{margin-top:12px}
+.legend-title{font-size:11px;font-weight:700;color:var(--text2);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px}
+.legend-items{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.legend-item{
+  display:flex;align-items:center;gap:8px;
+  padding:8px 10px;background:var(--card-bg);
+  border:1px solid var(--card-border);border-radius:8px;
+}
+.legend-dot{width:10px;height:10px;border-radius:3px;flex-shrink:0}
+.legend-text{font-size:12px;color:var(--text);font-weight:300;font-style:italic}
+.map-info-panel{
+  background:var(--card-bg);border:1px solid var(--card-border);
+  border-radius:10px;padding:12px 14px;margin-top:10px;
+  font-size:13px;color:var(--text2);line-height:1.6;
+}
+.map-info-panel strong{color:var(--text)}
+.gps-indicator{
+  display:flex;align-items:center;gap:6px;
+  background:rgba(36,123,160,0.08);border-radius:8px;
+  padding:8px 12px;margin-top:10px;
+  border:1px solid rgba(36,123,160,0.2);
+}
+.gps-dot{
+  width:8px;height:8px;border-radius:50%;
+  background:var(--cerulean);flex-shrink:0;
+  animation:pulse 2s infinite;
+}
+@keyframes pulse{
+  0%,100%{opacity:1;transform:scale(1)}
+  50%{opacity:0.5;transform:scale(0.8)}
+}
+.gps-text{font-size:12px;color:var(--cerulean);font-style:italic}
+/* MODAL */
+.modal-overlay{
+  position:fixed;inset:0;z-index:500;
+  background:rgba(0,0,0,0.6);
+  display:flex;align-items:flex-end;
+  opacity:0;pointer-events:none;transition:opacity .3s;
+}
+.modal-overlay.open{opacity:1;pointer-events:auto}
+.modal-sheet{
+  width:100%;background:var(--bg);
+  border-radius:20px 20px 0 0;
+  padding:20px 20px 40px;
+  transform:translateY(100%);transition:transform .35s cubic-bezier(0.34,1.1,0.64,1);
+  max-height:80vh;overflow-y:auto;
+}
+.modal-overlay.open .modal-sheet{transform:translateY(0)}
+.modal-handle{
+  width:36px;height:4px;border-radius:2px;
+  background:var(--card-border);margin:0 auto 16px;
+}
+.modal-title{font-size:20px;font-weight:700;margin-bottom:6px}
+.modal-subtitle{font-size:13px;color:var(--text2);font-style:italic;margin-bottom:16px}
+.modal-detail{
+  display:flex;align-items:center;gap:10px;
+  padding:10px 0;border-bottom:1px solid var(--card-border);
+  font-size:14px;color:var(--text2);
+}
+.modal-detail .material-icons-round{font-size:18px;color:var(--cerulean)}
+/* INSTALL BANNER */
+.install-banner{
+  background:var(--text);border-radius:10px;
+  padding:12px 14px;margin-bottom:12px;
+  display:flex;align-items:center;gap:10px;
+}
+.install-banner-text{flex:1;font-size:13px;color:#fff;font-style:italic;font-weight:300}
+.install-banner-text strong{font-weight:700;font-style:normal}
+.install-btn{
+  background:var(--accent);color:#fff;
+  border:none;border-radius:6px;
+  padding:7px 12px;font-size:12px;font-weight:700;
+  font-family:'Sansation',sans-serif;cursor:pointer;
+  white-space:nowrap;
+}
+/* SCROLLBAR */
+.screen::-webkit-scrollbar{width:3px}
+.screen::-webkit-scrollbar-track{background:transparent}
+.screen::-webkit-scrollbar-thumb{background:var(--card-border);border-radius:2px}
+/* LOADING */
+#loading{
+  position:fixed;inset:0;background:var(--bg);
+  display:flex;align-items:center;justify-content:center;
+  flex-direction:column;gap:16px;z-index:9999;
+  transition:opacity .5s;
+}
+#loading.hide{opacity:0;pointer-events:none}
+.loading-logo{font-size:48px;font-weight:700;font-family:'Sansation',sans-serif}
+.loading-logo .heart{color:var(--accent)}
+.loading-bar{
+  width:80px;height:3px;background:var(--bg2);border-radius:2px;overflow:hidden;
+}
+.loading-progress{
+  height:100%;width:0;background:var(--accent);border-radius:2px;
+  animation:load 1.5s ease-out forwards;
+}
+@keyframes load{to{width:100%}}
+/* ANIMATIONS */
+@keyframes fadeInUp{
+  from{opacity:0;transform:translateY(16px)}
+  to{opacity:1;transform:translateY(0)}
+}
+.animate-in{animation:fadeInUp .4s ease forwards}
+.news-card:nth-child(1){animation-delay:.05s;opacity:0}
+.news-card:nth-child(2){animation-delay:.1s;opacity:0}
+.news-card:nth-child(3){animation-delay:.15s;opacity:0}
+.news-card:nth-child(4){animation-delay:.2s;opacity:0}
+.schedule-slot{opacity:0;animation:fadeInUp .35s ease forwards}
+</style>
+</head>
+<body>
+<!-- LOADING SCREEN -->
+<div id="loading">
+  <div class="loading-logo"><span class="heart">❤</span>U</div>
+  <div class="loading-bar"><div class="loading-progress"></div></div>
+</div>
+
+<!-- APP SHELL -->
+<div id="app">
+  <!-- TOP BAR -->
+  <header id="topbar">
+    <div id="logo"><span class="heart">❤</span><span>U</span> <span style="font-weight:300;font-size:14px;font-style:italic;color:var(--text2)">festival</span></div>
+    <div id="topbar-right">
+      <button class="icon-btn" id="lang-btn" title="Switch language" aria-label="Taal wisselen">NL</button>
+      <button class="icon-btn" id="theme-btn" aria-label="Dark/light mode">
+        <span class="material-icons-round" id="theme-icon">dark_mode</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- SCREENS -->
+  <main id="content">
+    <!-- HOME -->
+    <section id="screen-home" class="screen active">
+      <div id="install-banner-wrap"></div>
+      <div class="hero-banner">
+        <div class="hero-date" id="h-date">15 & 16 augustus 2026 · Utrecht</div>
+        <div class="hero-title" id="h-title">Festival<br>voor studenten</div>
+        <div class="hero-subtitle" id="h-subtitle">Grasweide Strijkviertel, Utrecht</div>
+        <div class="hero-badge">
+          <span class="material-icons-round" style="font-size:12px">celebration</span>
+          <span id="h-badge">Nieuw festival!</span>
+        </div>
+      </div>
+
+      <div class="section-title" id="h-news-title">Nieuws &amp; Updates</div>
+
+      <div class="news-card accent animate-in">
+        <div class="news-card-tag" id="nc1-tag">Aankondiging</div>
+        <div class="news-card-title" id="nc1-title">App gelanceerd – welkom bij ❤️U!</div>
+        <div class="news-card-body" id="nc1-body">De officiële app is live! Bekijk het programma, de kaart en alle festival-info. Deel de app met je medestudenten.</div>
+        <div class="news-card-time" id="nc1-time">1 week voor het festival</div>
+      </div>
+
+      <div class="news-card cerulean animate-in">
+        <div class="news-card-tag" id="nc2-tag">Programma</div>
+        <div class="news-card-title" id="nc2-title">Line-up bekend – check het blokkenschema!</div>
+        <div class="news-card-body" id="nc2-body">Het volledige programma voor zaterdag en zondag is nu beschikbaar. Van reggae tot wetenschap – er is voor iedereen wat.</div>
+        <div class="news-card-time" id="nc2-time">5 augustus 2026</div>
+      </div>
+
+      <div class="news-card info animate-in">
+        <div class="news-card-tag" id="nc3-tag">Info</div>
+        <div class="news-card-title" id="nc3-title">Toegang: scan je ticket bij de ingang</div>
+        <div class="news-card-body" id="nc3-body">Houd je QR-ticket uit je e-mail of studentenportaal bij de hand. Toegang is alleen op naam. ID-controle mogelijk.</div>
+        <div class="news-card-time" id="nc3-time">8 augustus 2026</div>
+      </div>
+
+      <div class="news-card accent animate-in">
+        <div class="news-card-tag" id="nc4-tag">Duurzaamheid</div>
+        <div class="news-card-title" id="nc4-title">❤️U gaat voor zero waste</div>
+        <div class="news-card-body" id="nc4-body">Alle bekers zijn herbruikbaar. Breng geen single-use plastic mee. Vul je fles bij een van de watertappunten op het terrein.</div>
+        <div class="news-card-time" id="nc4-time">10 augustus 2026</div>
+      </div>
+    </section>
+
+    <!-- INFO -->
+    <section id="screen-info" class="screen">
+      <div class="info-header">
+        <h1 id="info-h1">Festival Info</h1>
+        <p id="info-p">Alles wat je moet weten over ❤️U 2026</p>
+      </div>
+      <div id="accordion-wrap"></div>
+    </section>
+
+    <!-- SCHEDULE -->
+    <section id="screen-schedule" class="screen">
+      <div class="schedule-header">
+        <div class="day-tabs">
+          <button class="day-tab active" data-day="0" id="tab-day0">Za 15 aug</button>
+          <button class="day-tab" data-day="1" id="tab-day1">Zo 16 aug</button>
+        </div>
+        <div class="stage-filter" id="stage-filter"></div>
+      </div>
+      <div id="schedule-list"></div>
+    </section>
+
+    <!-- MAP -->
+    <section id="screen-map" class="screen">
+      <div class="map-header">
+        <div class="section-title" id="map-title">Festivalkaart</div>
+      </div>
+      <div class="map-container" id="map-container">
+        <div class="map-svg-wrapper" id="map-svg-wrapper"></div>
+        <div class="map-controls">
+          <button class="map-btn" id="zoom-in" aria-label="Zoom in"><span class="material-icons-round" style="font-size:20px">add</span></button>
+          <button class="map-btn" id="zoom-out" aria-label="Zoom uit"><span class="material-icons-round" style="font-size:20px">remove</span></button>
+          <button class="map-btn" id="my-loc" aria-label="Mijn locatie"><span class="material-icons-round" style="font-size:20px;color:var(--cerulean)">my_location</span></button>
+        </div>
+      </div>
+      <div class="gps-indicator" id="gps-indicator">
+        <div class="gps-dot"></div>
+        <div class="gps-text" id="gps-text">GPS actief · locatie wordt bepaald…</div>
+      </div>
+      <div class="legend">
+        <div class="legend-title" id="legend-title">Legenda</div>
+        <div class="legend-items">
+          <div class="legend-item"><div class="legend-dot" style="background:var(--accent)"></div><div class="legend-text" id="leg1">Main Stage</div></div>
+          <div class="legend-item"><div class="legend-dot" style="background:var(--cerulean)"></div><div class="legend-text" id="leg2">Stage B – Club</div></div>
+          <div class="legend-item"><div class="legend-dot" style="background:var(--saffron)"></div><div class="legend-text" id="leg3">Stage C – Toneel</div></div>
+          <div class="legend-item"><div class="legend-dot" style="background:#7B4FBF"></div><div class="legend-text" id="leg4">Stage D – Science</div></div>
+          <div class="legend-item"><div class="legend-dot" style="background:#4CAF50"></div><div class="legend-text" id="leg5">Eten &amp; Drinken</div></div>
+          <div class="legend-item"><div class="legend-dot" style="background:#888"></div><div class="legend-text" id="leg6">Faciliteiten</div></div>
+        </div>
+      </div>
+      <div class="map-info-panel" id="map-info">
+        <strong id="map-info-title">Grasweide Strijkviertel</strong><br>
+        <span id="map-info-body">Nieuwekade, Utrecht · ook locatie van festivals Verknipt &amp; Lief. Bereikbaar per fiets, bus lijn 12 en 28 stoppen vlakbij.</span>
+      </div>
+    </section>
+  </main>
+
+  <!-- BOTTOM NAV -->
+  <nav id="nav">
+    <button class="nav-item active" data-screen="home">
+      <span class="material-icons-round">home</span>
+      <span class="label" id="nav-home">Home</span>
+    </button>
+    <button class="nav-item" data-screen="info">
+      <span class="material-icons-round">info</span>
+      <span class="label" id="nav-info">Info</span>
+    </button>
+    <button class="nav-item" data-screen="schedule">
+      <span class="material-icons-round">calendar_month</span>
+      <span class="label" id="nav-schedule">Programma</span>
+    </button>
+    <button class="nav-item" data-screen="map">
+      <span class="material-icons-round">map</span>
+      <span class="label" id="nav-map">Kaart</span>
+    </button>
+  </nav>
+</div>
+
+<!-- SLOT DETAIL MODAL -->
+<div class="modal-overlay" id="slot-modal">
+  <div class="modal-sheet">
+    <div class="modal-handle"></div>
+    <div class="modal-title" id="modal-title"></div>
+    <div class="modal-subtitle" id="modal-subtitle"></div>
+    <div class="modal-detail">
+      <span class="material-icons-round">schedule</span>
+      <span id="modal-time"></span>
+    </div>
+    <div class="modal-detail">
+      <span class="material-icons-round">location_on</span>
+      <span id="modal-stage"></span>
+    </div>
+    <div class="modal-detail">
+      <span class="material-icons-round">music_note</span>
+      <span id="modal-genre"></span>
+    </div>
+    <div class="modal-detail" id="modal-desc-row">
+      <span class="material-icons-round">article</span>
+      <span id="modal-desc"></span>
+    </div>
+    <button style="width:100%;margin-top:16px;padding:14px;background:var(--accent);color:#fff;border:none;border-radius:8px;font-family:'Sansation',sans-serif;font-size:15px;font-weight:700;cursor:pointer" id="modal-close-btn">Sluiten</button>
+  </div>
+</div>
+
+<script>
+// ==================== DATA ====================
+const i18n = {
+  nl: {
+    'h-date': '15 & 16 augustus 2026 · Utrecht',
+    'h-title': 'Festival\nvoor studenten',
+    'h-subtitle': 'Grasweide Strijkviertel, Utrecht',
+    'h-badge': 'Nieuw festival!',
+    'h-news-title': 'Nieuws & Updates',
+    'nc1-tag': 'Aankondiging', 'nc1-title': 'App gelanceerd – welkom bij ❤️U!',
+    'nc1-body': 'De officiële app is live! Bekijk het programma, de kaart en alle festival-info.',
+    'nc1-time': '1 week voor het festival',
+    'nc2-tag': 'Programma', 'nc2-title': 'Line-up bekend – check het blokkenschema!',
+    'nc2-body': 'Het volledige programma voor zaterdag en zondag is nu beschikbaar.',
+    'nc2-time': '5 augustus 2026',
+    'nc3-tag': 'Info', 'nc3-title': 'Toegang: scan je ticket bij de ingang',
+    'nc3-body': 'Houd je QR-ticket klaar. Toegang op naam, ID-controle mogelijk.',
+    'nc3-time': '8 augustus 2026',
+    'nc4-tag': 'Duurzaamheid', 'nc4-title': '❤️U gaat voor zero waste',
+    'nc4-body': 'Alle bekers zijn herbruikbaar. Vul je fles bij een watertappunt.',
+    'nc4-time': '10 augustus 2026',
+    'info-h1': 'Festival Info',
+    'info-p': 'Alles wat je moet weten over ❤️U 2026',
+    'tab-day0': 'Za 15 aug', 'tab-day1': 'Zo 16 aug',
+    'map-title': 'Festivalkaart',
+    'gps-text': 'GPS actief · locatie wordt bepaald…',
+    'legend-title': 'Legenda',
+    'leg1':'Main Stage','leg2':'Stage B – Club','leg3':'Stage C – Toneel',
+    'leg4':'Stage D – Science','leg5':'Eten & Drinken','leg6':'Faciliteiten',
+    'map-info-title': 'Grasweide Strijkviertel',
+    'map-info-body': 'Nieuwekade, Utrecht · ook locatie van Verknipt & Lief. Bereikbaar per fiets, bus 12/28.',
+    'nav-home':'Home','nav-info':'Info','nav-schedule':'Programma','nav-map':'Kaart',
+    'install-text': '<strong>Installeer de app</strong> voor snelle toegang tijdens het festival!',
+    'install-btn': 'Installeer',
+    'all-stages': 'Alle podia'
+  },
+  en: {
+    'h-date': '15 & 16 August 2026 · Utrecht',
+    'h-title': 'Festival\nfor students',
+    'h-subtitle': 'Grasweide Strijkviertel, Utrecht',
+    'h-badge': 'Brand new!',
+    'h-news-title': 'News & Updates',
+    'nc1-tag': 'Announcement', 'nc1-title': 'App launched – welcome to ❤️U!',
+    'nc1-body': 'The official app is live! Check the schedule, map and all festival info.',
+    'nc1-time': '1 week before the festival',
+    'nc2-tag': 'Programme', 'nc2-title': 'Line-up revealed – check the schedule!',
+    'nc2-body': 'The full programme for Saturday and Sunday is now available.',
+    'nc2-time': '5 August 2026',
+    'nc3-tag': 'Info', 'nc3-title': 'Entry: scan your ticket at the gate',
+    'nc3-body': 'Have your QR ticket ready. Entry is by name, ID check possible.',
+    'nc3-time': '8 August 2026',
+    'nc4-tag': 'Sustainability', 'nc4-title': '❤️U goes zero waste',
+    'nc4-body': 'All cups are reusable. Refill your bottle at a water tap.',
+    'nc4-time': '10 August 2026',
+    'info-h1': 'Festival Info',
+    'info-p': 'Everything you need to know about ❤️U 2026',
+    'tab-day0': 'Sat 15 Aug', 'tab-day1': 'Sun 16 Aug',
+    'map-title': 'Festival Map',
+    'gps-text': 'GPS active · determining location…',
+    'legend-title': 'Legend',
+    'leg1':'Main Stage','leg2':'Stage B – Club','leg3':'Stage C – Theatre',
+    'leg4':'Stage D – Science','leg5':'Food & Drinks','leg6':'Facilities',
+    'map-info-title': 'Grasweide Strijkviertel',
+    'map-info-body': 'Nieuwekade, Utrecht · also home to Verknipt & Lief. Accessible by bike, bus 12/28.',
+    'nav-home':'Home','nav-info':'Info','nav-schedule':'Schedule','nav-map':'Map',
+    'install-text': '<strong>Install the app</strong> for quick access during the festival!',
+    'install-btn': 'Install',
+    'all-stages': 'All stages'
+  }
+};
+
+const accordionData = {
+  nl: [
+    {
+      title: '🎪 Over ❤️U festival',
+      body: `❤️U is een nieuw tweedaags festival voor (nieuwe) studenten in de regio Utrecht. Het festival vindt voor het eerst plaats op <strong>zaterdag 15 en zondag 16 augustus 2026</strong> op de <strong>Grasweide Strijkviertel</strong> in Utrecht – direct na de Utrechtse Introductie Tijd (UIT).<br><br>
+      Het festival biedt een diverse programmering met speciale aandacht voor <strong>regionaal en nationaal talent</strong> op het gebied van muziek, toneel en wetenschap.`
+    },
+    {
+      title: '🎟 Tickets & toegang',
+      body: `Tickets (op naam) worden uitgereikt via jouw <strong>onderwijsinstelling</strong>. Het is ook mogelijk tickets te bestellen voor introducees.<br><br>
+      <span class="info-chip"><span class="material-icons-round">qr_code_scanner</span>QR-ticket vereist</span>
+      <span class="info-chip"><span class="material-icons-round">badge</span>ID op naam</span>
+      <span class="info-chip"><span class="material-icons-round">group</span>Introducees welkom</span><br><br>
+      ❤️U heeft <strong>GEEN camping</strong>. Overnachten op het terrein is niet mogelijk.`
+    },
+    {
+      title: '📍 Locatie & bereikbaarheid',
+      body: `Het festival vindt plaats op de <strong>Grasweide Strijkviertel</strong>, Nieuwekade, Utrecht. Dit is dezelfde locatie als de festivals Verknipt en Lief.<br><br>
+      <span class="info-chip"><span class="material-icons-round">directions_bike</span>Fiets aanbevolen</span>
+      <span class="info-chip"><span class="material-icons-round">directions_bus</span>Bus 12 & 28</span>
+      <span class="info-chip"><span class="material-icons-round">train</span>15 min. lopen CS</span><br><br>
+      Er is <strong>geen parkeerterrein</strong> op het festivalterrein. Gebruik OV of kom op de fiets.`
+    },
+    {
+      title: '🎵 Programma & podia',
+      body: `Het festival beschikt over 4 podia:<br><br>
+      <strong>Main Stage</strong> – Grote acts, nationale namen<br>
+      <strong>Stage B (Club)</strong> – Elektronische muziek & urban<br>
+      <strong>Stage C (Toneel)</strong> – Theater, comedy, spoken word<br>
+      <strong>Stage D (Science)</strong> – Lezingen, TED-style talks<br><br>
+      Er is ook ruimte voor <strong>studentenclubs en -verenigingen</strong> om zich te presenteren aan de bezoekers.`
+    },
+    {
+      title: '🍔 Eten & Drinken',
+      body: `Op het festivalterrein zijn meerdere foodtrucks en kraampjes aanwezig met gevarieerd aanbod, inclusief <strong>vegetarische en veganistische</strong> opties.<br><br>
+      <span class="info-chip"><span class="material-icons-round">water_drop</span>Gratis water tappunten</span>
+      <span class="info-chip"><span class="material-icons-round">eco</span>Zero waste beleid</span><br><br>
+      Alle bekers zijn herbruikbaar. Eigen eten en drinken meenemen is <strong>niet</strong> toegestaan (uitzondering: lege waterfles).`
+    },
+    {
+      title: '♿ Toegankelijkheid',
+      body: `❤️U wil toegankelijk zijn voor iedereen.<br><br>
+      <span class="info-chip"><span class="material-icons-round">accessible</span>Rolstoeltoegankelijk</span>
+      <span class="info-chip"><span class="material-icons-round">hearing</span>Inductielussen</span>
+      <span class="info-chip"><span class="material-icons-round">wc</span>Toegankelijke toiletten</span><br><br>
+      Heb je specifieke behoeften? Neem dan contact op via de website voor aanvullende ondersteuning.`
+    },
+    {
+      title: '🏫 Organisatie & sponsors',
+      body: `❤️U wordt gesponsord door:<br><br>
+      <strong>Gemeente Utrecht</strong> · <strong>Hogeschool Utrecht (HU)</strong> · <strong>Universiteit Utrecht (UU)</strong> · <strong>GLU</strong> en andere ROC's in de regio.<br><br>
+      De organisatie werkt samen met de <strong>Utrechtse Introductie Tijd (UIT)</strong> om een naadloze overgang te bieden voor nieuwe studenten.`
+    }
+  ],
+  en: [
+    {
+      title: '🎪 About ❤️U festival',
+      body: `❤️U is a brand new two-day festival for (new) students in the Utrecht region. The first edition takes place on <strong>Saturday 15 and Sunday 16 August 2026</strong> at <strong>Grasweide Strijkviertel</strong> in Utrecht – right after the Utrecht Introduction Period (UIT).<br><br>
+      The festival offers a diverse programme with special focus on <strong>regional and national talent</strong> in music, theatre and science.`
+    },
+    {
+      title: '🎟 Tickets & entry',
+      body: `Tickets (personalised) are distributed through your <strong>educational institution</strong>. You can also order tickets for introduction guests.<br><br>
+      <span class="info-chip"><span class="material-icons-round">qr_code_scanner</span>QR ticket required</span>
+      <span class="info-chip"><span class="material-icons-round">badge</span>Name-based entry</span>
+      <span class="info-chip"><span class="material-icons-round">group</span>Guests welcome</span><br><br>
+      ❤️U has <strong>NO camping</strong>. Overnight stays on site are not possible.`
+    },
+    {
+      title: '📍 Location & getting here',
+      body: `The festival takes place at <strong>Grasweide Strijkviertel</strong>, Nieuwekade, Utrecht – the same venue as Verknipt and Lief festivals.<br><br>
+      <span class="info-chip"><span class="material-icons-round">directions_bike</span>Bike recommended</span>
+      <span class="info-chip"><span class="material-icons-round">directions_bus</span>Bus 12 & 28</span>
+      <span class="info-chip"><span class="material-icons-round">train</span>15 min walk from CS</span><br><br>
+      There is <strong>no parking</strong> at the festival site. Use public transport or come by bike.`
+    },
+    {
+      title: '🎵 Programme & stages',
+      body: `The festival has 4 stages:<br><br>
+      <strong>Main Stage</strong> – Major acts, national names<br>
+      <strong>Stage B (Club)</strong> – Electronic music & urban<br>
+      <strong>Stage C (Theatre)</strong> – Theatre, comedy, spoken word<br>
+      <strong>Stage D (Science)</strong> – Lectures, TED-style talks<br><br>
+      There is also space for <strong>student clubs and associations</strong> to present themselves to visitors.`
+    },
+    {
+      title: '🍔 Food & Drinks',
+      body: `Multiple food trucks and stalls will be present offering a variety of options, including <strong>vegetarian and vegan</strong> choices.<br><br>
+      <span class="info-chip"><span class="material-icons-round">water_drop</span>Free water taps</span>
+      <span class="info-chip"><span class="material-icons-round">eco</span>Zero waste policy</span><br><br>
+      All cups are reusable. Bringing your own food and drinks is <strong>not</strong> allowed (exception: empty water bottle).`
+    },
+    {
+      title: '♿ Accessibility',
+      body: `❤️U aims to be accessible to everyone.<br><br>
+      <span class="info-chip"><span class="material-icons-round">accessible</span>Wheelchair accessible</span>
+      <span class="info-chip"><span class="material-icons-round">hearing</span>Induction loops</span>
+      <span class="info-chip"><span class="material-icons-round">wc</span>Accessible toilets</span><br><br>
+      Do you have specific needs? Contact us via the website for additional support.`
+    },
+    {
+      title: '🏫 Organisation & sponsors',
+      body: `❤️U is sponsored by:<br><br>
+      <strong>Municipality Utrecht</strong> · <strong>Utrecht University of Applied Sciences (HU)</strong> · <strong>Utrecht University (UU)</strong> · <strong>GLU</strong> and other ROC institutions in the region.<br><br>
+      The organisation works closely with the <strong>Utrecht Introduction Period (UIT)</strong> to provide a smooth transition for new students.`
+    }
+  ]
+};
+
+const scheduleData = [
+  // Day 0 - Saturday
+  {day:0, time:'12:00', end:'12:45', name:'DJ Starter', genre:'Electronic', stage:'stage-b', stageLabel:'Stage B – Club', desc:'Kick-off met energieke elektronische beats om het festival te openen.'},
+  {day:0, time:'13:00', end:'13:45', name:'TED Utrecht: Toekomst van AI', genre:'Wetenschap', stage:'stage-d', stageLabel:'Stage D – Science', desc:'Inspirerende lezing over de rol van kunstmatige intelligentie in de samenleving van morgen.'},
+  {day:0, time:'13:30', end:'14:30', name:'Lotte Lorelei', genre:'Indie Pop', stage:'stage-mainstage', stageLabel:'Main Stage', desc:'Lokale Utrecht-artiest met indiepop-nummers over studentenleven en liefde.'},
+  {day:0, time:'14:00', end:'14:30', name:'Comedyshow: Open Mic', genre:'Comedy', stage:'stage-c', stageLabel:'Stage C – Toneel', desc:'Studenten en jonge comedians in een open podium. Aanmelden mogelijk!'},
+  {day:0, time:'15:00', end:'16:00', name:'Broederliefde Tribute', genre:'Hip-hop', stage:'stage-mainstage', stageLabel:'Main Stage', desc:'Hommage aan Nederlandse hip-hop cultuur door studenten-collectief uit Utrecht.'},
+  {day:0, time:'15:30', end:'16:15', name:'Klimaatpanel: Utrecht 2050', genre:'Wetenschap', stage:'stage-d', stageLabel:'Stage D – Science', desc:'Wetenschappers en studenten discussiëren over de toekomst van onze stad.'},
+  {day:0, time:'16:30', end:'17:30', name:'MEAU (Special Set)', genre:'Pop / Soul', stage:'stage-mainstage', stageLabel:'Main Stage', desc:'Nederlandse soul en pop – speciaal optreden voor de studenten van Utrecht.'},
+  {day:0, time:'17:00', end:'17:45', name:'Theaterstuk: "Eerste Dag"', genre:'Theater', stage:'stage-c', stageLabel:'Stage C – Toneel', desc:'Een kort theaterstuk over de emoties van de eerste dag op een nieuwe opleiding.'},
+  {day:0, time:'18:00', end:'19:00', name:'Pauze / Food trucks', genre:'–', stage:'stage-b', stageLabel:'Stage B – Club', desc:'Relax set terwijl je eet. Lichte grooves en chill vibes.'},
+  {day:0, time:'19:30', end:'20:30', name:'Kraantje Pappie', genre:'Hip-hop / Comedy', stage:'stage-mainstage', stageLabel:'Main Stage', desc:'Energiek optreden van de komische rapper. Zaal vol gegarandeerd!'},
+  {day:0, time:'20:00', end:'21:00', name:'Drum & Bass Night Opener', genre:'Drum & Bass', stage:'stage-b', stageLabel:'Stage B – Club', desc:'De nacht begint met zware baslijnen in de Club Stage.'},
+  {day:0, time:'21:00', end:'22:30', name:'Suzan & Freek', genre:'Pop', stage:'stage-mainstage', stageLabel:'Main Stage', desc:'Het bekende duo sluit zaterdag af met emotionele pop en geweldige sfeer.'},
+  {day:0, time:'21:30', end:'23:00', name:'Technodisco', genre:'Techno', stage:'stage-b', stageLabel:'Stage B – Club', desc:'Lokale techno-producers nemen het stokje over tot de vroege uurtjes.'},
+  // Day 1 - Sunday
+  {day:1, time:'12:00', end:'12:45', name:'Yoga & Mindfulness', genre:'Welzijn', stage:'stage-d', stageLabel:'Stage D – Science', desc:'Begin zondag rustig met een geleide yogasessie voor alle levels.'},
+  {day:1, time:'13:00', end:'14:00', name:'Dijkhuizen Collective', genre:'Jazz / Fusion', stage:'stage-mainstage', stageLabel:'Main Stage', desc:'Utrechts jazzensemble met moderne fusion-klanken. Verfrissend en onverwacht.'},
+  {day:1, time:'13:30', end:'14:00', name:'Spoken Word Slam', genre:'Poëzie', stage:'stage-c', stageLabel:'Stage C – Toneel', desc:'Studenten presenteren zelfgeschreven spoken word en poëzie.'},
+  {day:1, time:'14:00', end:'14:45', name:'Hoe werkt het brein?', genre:'Wetenschap', stage:'stage-d', stageLabel:'Stage D – Science', desc:'Neurowetenschapper van de UU neemt je mee op reis door het menselijk brein.'},
+  {day:1, time:'14:30', end:'15:30', name:'Pip Millet', genre:'Soul / R&B', stage:'stage-mainstage', stageLabel:'Main Stage', desc:'Opkomende internationale soulartiest met diepe stem en prachtige balads.'},
+  {day:1, time:'15:30', end:'16:00', name:'Improv Comedy', genre:'Comedy', stage:'stage-c', stageLabel:'Stage C – Toneel', desc:'Improvisatietheater: het publiek bepaalt het verhaal. Altijd anders, altijd grappig.'},
+  {day:1, time:'16:00', end:'17:00', name:'Studentenband Battle', genre:'Mixed', stage:'stage-mainstage', stageLabel:'Main Stage', desc:'Strijd der bands! Drie studentenbands strijden om de publieksprijs.'},
+  {day:1, time:'16:30', end:'17:15', name:'Duurzaam Ondernemen', genre:'Wetenschap', stage:'stage-d', stageLabel:'Stage D – Science', desc:'HU-studenten presenteren hun meest innovatieve duurzame ondernemingsplannen.'},
+  {day:1, time:'17:30', end:'18:30', name:'Tom Gregory', genre:'Pop / Electronic', stage:'stage-mainstage', stageLabel:'Main Stage', desc:'Internationale pop met elektronische productie. Grootse sound, persoonlijke verhalen.'},
+  {day:1, time:'18:00', end:'18:45', name:'Avondshow: "Studententijd"', genre:'Theater', stage:'stage-c', stageLabel:'Stage C – Toneel', desc:'Afsluiting van het theaterprogramma met een warm, humoristisch studentenleven-stuk.'},
+  {day:1, time:'19:00', end:'20:00', name:'DJ Set: Chill Sunset', genre:'Deep House', stage:'stage-b', stageLabel:'Stage B – Club', desc:'Zachte deep house terwijl de zon ondergaat. Het perfecte moment om bij te komen.'},
+  {day:1, time:'20:30', end:'22:00', name:'RACOON', genre:'Rock / Pop', stage:'stage-mainstage', stageLabel:'Main Stage', desc:'Nederlandse rockband als ster-act op zondagavond. Episch festivalslot!'},
+  {day:1, time:'21:00', end:'22:30', name:'Festival Closing Party', genre:'Dance / Pop', stage:'stage-b', stageLabel:'Stage B – Club', desc:'De perfecte afsluiting van het eerste ❤️U festival. Tot volgend jaar!'},
+];
+
+// ==================== STATE ====================
+let lang = 'nl';
+let theme = 'light';
+let activeScreen = 'home';
+let activeDay = 0;
+let activeStage = 'all';
+let deferredInstall = null;
+let mapScale = 1;
+let mapOffsetX = 0;
+let mapOffsetY = 0;
+
+// ==================== INIT ====================
+window.addEventListener('load', () => {
+  setTimeout(() => {
+    document.getElementById('loading').classList.add('hide');
+    setTimeout(() => document.getElementById('loading').remove(), 600);
+  }, 1800);
+  buildAccordion();
+  buildSchedule();
+  buildMap();
+  setupNav();
+  setupTopBar();
+  setupInstall();
+  setupModal();
+  applyLang();
+  requestGPS();
+});
+
+// ==================== LANG ====================
+function applyLang() {
+  const t = i18n[lang];
+  Object.keys(t).forEach(id => {
+    const el = document.getElementById(id);
+    if (el && id !== 'h-title') el.innerHTML = t[id];
+    else if (el && id === 'h-title') {
+      el.innerHTML = t[id].replace('\n','<br>');
+    }
+  });
+  document.getElementById('lang-btn').textContent = lang === 'nl' ? 'EN' : 'NL';
+  document.documentElement.lang = lang;
+  buildAccordion();
+  buildSchedule();
+}
+
+// ==================== ACCORDION ====================
+function buildAccordion() {
+  const wrap = document.getElementById('accordion-wrap');
+  wrap.innerHTML = '';
+  accordionData[lang].forEach((item, i) => {
+    const div = document.createElement('div');
+    div.className = 'accordion-item';
+    div.innerHTML = `
+      <button class="accordion-btn" aria-expanded="false">
+        <span class="accordion-btn-title">${item.title}</span>
+        <span class="material-icons-round accordion-icon" aria-hidden="true">expand_more</span>
+      </button>
+      <div class="accordion-body" role="region">
+        <div class="accordion-body-inner">${item.body}</div>
+      </div>`;
+    div.querySelector('.accordion-btn').addEventListener('click', () => {
+      const isOpen = div.classList.contains('open');
+      document.querySelectorAll('.accordion-item.open').forEach(el => el.classList.remove('open'));
+      if (!isOpen) div.classList.add('open');
+    });
+    wrap.appendChild(div);
+  });
+}
+
+// ==================== SCHEDULE ====================
+function buildSchedule() {
+  const t = i18n[lang];
+  // Stage filter
+  const stages = [
+    {id:'all', label: t['all-stages']},
+    {id:'stage-mainstage', label:'Main Stage'},
+    {id:'stage-b', label:'Stage B'},
+    {id:'stage-c', label:'Stage C'},
+    {id:'stage-d', label:'Stage D'},
+  ];
+  const filterEl = document.getElementById('stage-filter');
+  filterEl.innerHTML = '';
+  stages.forEach(s => {
+    const btn = document.createElement('button');
+    btn.className = 'stage-chip' + (s.id === activeStage ? ' active' : '');
+    btn.textContent = s.label;
+    btn.addEventListener('click', () => {
+      activeStage = s.id;
+      buildSchedule();
+    });
+    filterEl.appendChild(btn);
+  });
+
+  // Day tabs
+  document.querySelectorAll('.day-tab').forEach(tab => {
+    tab.classList.toggle('active', parseInt(tab.dataset.day) === activeDay);
+    tab.addEventListener('click', () => {
+      activeDay = parseInt(tab.dataset.day);
+      buildSchedule();
+    });
+  });
+
+  const list = document.getElementById('schedule-list');
+  list.innerHTML = '';
+  const filtered = scheduleData
+    .filter(s => s.day === activeDay && (activeStage === 'all' || s.stage === activeStage))
+    .sort((a, b) => a.time.localeCompare(b.time));
+
+  let lastHour = '';
+  filtered.forEach((slot, idx) => {
+    const hour = slot.time.substring(0,2) + ':00';
+    if (hour !== lastHour) {
+      const lbl = document.createElement('div');
+      lbl.className = 'time-label';
+      lbl.textContent = hour;
+      list.appendChild(lbl);
+      lastHour = hour;
+    }
+    const el = document.createElement('div');
+    el.className = `schedule-slot ${slot.stage}`;
+    el.style.animationDelay = (idx * 0.04) + 's';
+    el.innerHTML = `
+      <div class="slot-time">${slot.time} – ${slot.end}</div>
+      <div class="slot-name">${slot.name}</div>
+      <div class="slot-genre">${slot.genre}</div>
+      <div class="slot-stage ${slot.stage}">${slot.stageLabel}</div>`;
+    el.addEventListener('click', () => openSlotModal(slot));
+    list.appendChild(el);
+  });
+
+  if (filtered.length === 0) {
+    const empty = document.createElement('div');
+    empty.style.cssText = 'text-align:center;padding:40px 16px;color:var(--text2);font-style:italic';
+    empty.textContent = lang === 'nl' ? 'Geen optredens gevonden voor deze selectie.' : 'No performances found for this selection.';
+    list.appendChild(empty);
+  }
+}
+
+// ==================== MODAL ====================
+function setupModal() {
+  const overlay = document.getElementById('slot-modal');
+  overlay.addEventListener('click', e => {
+    if (e.target === overlay) closeModal();
+  });
+  document.getElementById('modal-close-btn').addEventListener('click', closeModal);
+}
+function openSlotModal(slot) {
+  document.getElementById('modal-title').textContent = slot.name;
+  document.getElementById('modal-subtitle').textContent = slot.genre;
+  document.getElementById('modal-time').textContent = slot.time + ' – ' + slot.end;
+  document.getElementById('modal-stage').textContent = slot.stageLabel;
+  document.getElementById('modal-genre').textContent = slot.genre;
+  document.getElementById('modal-desc').textContent = slot.desc;
+  document.getElementById('slot-modal').classList.add('open');
+}
+function closeModal() {
+  document.getElementById('slot-modal').classList.remove('open');
+}
+
+// ==================== MAP ====================
+function buildMap() {
+  const wrapper = document.getElementById('map-svg-wrapper');
+  wrapper.innerHTML = `
+<svg viewBox="0 0 360 340" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;display:block" id="festival-map">
+  <defs>
+    <pattern id="grass" patternUnits="userSpaceOnUse" width="8" height="8">
+      <rect width="8" height="8" fill="#4a7c3f" opacity="0.25"/>
+      <line x1="0" y1="4" x2="8" y2="4" stroke="#5a9a4f" stroke-width="0.5" opacity="0.3"/>
+    </pattern>
+  </defs>
+  <!-- Background grass -->
+  <rect width="360" height="340" fill="url(#grass)" rx="0"/>
+  <!-- Water / river left -->
+  <rect x="0" y="0" width="28" height="340" fill="#247BA0" opacity="0.35"/>
+  <text x="14" y="175" fill="#247BA0" font-size="8" text-anchor="middle" transform="rotate(-90,14,175)" font-family="Sansation,sans-serif" opacity="0.8">Leidsche Rijn</text>
+  <!-- Fence outline -->
+  <rect x="30" y="10" width="320" height="320" fill="none" stroke="#888" stroke-width="1.5" stroke-dasharray="4,3" rx="8"/>
+  <!-- Entry -->
+  <rect x="170" y="310" width="40" height="20" fill="#555" rx="3"/>
+  <text x="190" y="323" fill="#fff" font-size="8" text-anchor="middle" font-family="Sansation,sans-serif" font-weight="700">INGANG</text>
+  <!-- MAIN STAGE -->
+  <rect x="80" y="20" width="200" height="80" fill="#F03228" rx="6" opacity="0.85"/>
+  <text x="180" y="55" fill="#fff" font-size="13" text-anchor="middle" font-family="Sansation,sans-serif" font-weight="700">MAIN STAGE</text>
+  <text x="180" y="72" fill="rgba(255,255,255,0.8)" font-size="9" text-anchor="middle" font-family="Sansation,sans-serif">Mainstage · Nationale acts</text>
+  <!-- STAGE B -->
+  <rect x="35" y="120" width="90" height="60" fill="#247BA0" rx="6" opacity="0.85"/>
+  <text x="80" y="148" fill="#fff" font-size="11" text-anchor="middle" font-family="Sansation,sans-serif" font-weight="700">STAGE B</text>
+  <text x="80" y="163" fill="rgba(255,255,255,0.8)" font-size="8" text-anchor="middle" font-family="Sansation,sans-serif">Club / Electronic</text>
+  <!-- STAGE C -->
+  <rect x="235" y="120" width="90" height="60" fill="#E3B505" rx="6" opacity="0.85"/>
+  <text x="280" y="148" fill="#1a0f00" font-size="11" text-anchor="middle" font-family="Sansation,sans-serif" font-weight="700">STAGE C</text>
+  <text x="280" y="163" fill="rgba(0,0,0,0.65)" font-size="8" text-anchor="middle" font-family="Sansation,sans-serif">Toneel / Comedy</text>
+  <!-- STAGE D -->
+  <rect x="235" y="200" width="90" height="55" fill="#7B4FBF" rx="6" opacity="0.85"/>
+  <text x="280" y="225" fill="#fff" font-size="11" text-anchor="middle" font-family="Sansation,sans-serif" font-weight="700">STAGE D</text>
+  <text x="280" y="240" fill="rgba(255,255,255,0.8)" font-size="8" text-anchor="middle" font-family="Sansation,sans-serif">Science / Talks</text>
+  <!-- FOOD AREA -->
+  <rect x="35" y="200" width="90" height="55" fill="#4CAF50" rx="6" opacity="0.75"/>
+  <text x="80" y="225" fill="#fff" font-size="10" text-anchor="middle" font-family="Sansation,sans-serif" font-weight="700">FOOD &amp;</text>
+  <text x="80" y="240" fill="#fff" font-size="10" text-anchor="middle" font-family="Sansation,sans-serif" font-weight="700">DRINKS</text>
+  <!-- STUDENT CLUBS -->
+  <rect x="140" y="130" width="80" height="45" fill="#888" rx="5" opacity="0.7"/>
+  <text x="180" y="151" fill="#fff" font-size="9" text-anchor="middle" font-family="Sansation,sans-serif" font-weight="700">STUDENTCLUBS</text>
+  <text x="180" y="165" fill="rgba(255,255,255,0.8)" font-size="7.5" text-anchor="middle" font-family="Sansation,sans-serif">&amp; Verenigingen</text>
+  <!-- TOILETS -->
+  <rect x="140" y="200" width="36" height="28" fill="#666" rx="4" opacity="0.7"/>
+  <text x="158" y="218" fill="#fff" font-size="8" text-anchor="middle" font-family="Sansation,sans-serif">WC</text>
+  <!-- FIRST AID -->
+  <rect x="185" y="200" width="36" height="28" fill="#e53935" rx="4" opacity="0.8"/>
+  <text x="203" y="218" fill="#fff" font-size="8" text-anchor="middle" font-family="Sansation,sans-serif" font-weight="700">EHBO</text>
+  <!-- LOCKERS -->
+  <rect x="140" y="240" width="80" height="22" fill="#555" rx="4" opacity="0.7"/>
+  <text x="180" y="255" fill="#fff" font-size="8" text-anchor="middle" font-family="Sansation,sans-serif">LOCKERS</text>
+  <!-- INFO punt -->
+  <circle cx="180" cy="105" r="10" fill="#fff" opacity="0.9"/>
+  <text x="180" y="109" fill="#247BA0" font-size="11" text-anchor="middle" font-family="Sansation,sans-serif" font-weight="700">i</text>
+  <!-- North indicator -->
+  <text x="340" y="25" fill="rgba(255,255,255,0.6)" font-size="10" text-anchor="middle" font-family="Sansation,sans-serif">N</text>
+  <line x1="340" y1="28" x2="340" y2="40" stroke="rgba(255,255,255,0.5)" stroke-width="1.5"/>
+  <!-- GPS dot placeholder -->
+  <circle id="gps-map-dot" cx="180" cy="295" r="7" fill="#247BA0" opacity="0.9"/>
+  <circle id="gps-map-pulse" cx="180" cy="295" r="12" fill="none" stroke="#247BA0" stroke-width="2" opacity="0.4"/>
+</svg>`;
+
+  // Zoom controls
+  const svg = document.getElementById('festival-map');
+  document.getElementById('zoom-in').addEventListener('click', () => {
+    mapScale = Math.min(mapScale + 0.25, 2.5);
+    svg.style.transform = `scale(${mapScale}) translate(${mapOffsetX}px,${mapOffsetY}px)`;
+    svg.style.transformOrigin = 'center center';
+  });
+  document.getElementById('zoom-out').addEventListener('click', () => {
+    mapScale = Math.max(mapScale - 0.25, 0.8);
+    svg.style.transform = `scale(${mapScale}) translate(${mapOffsetX}px,${mapOffsetY}px)`;
+    svg.style.transformOrigin = 'center center';
+  });
+  document.getElementById('my-loc').addEventListener('click', () => {
+    mapScale = 1;
+    svg.style.transform = '';
+    requestGPS();
+  });
+}
+
+// ==================== GPS ====================
+function requestGPS() {
+  const gpsText = document.getElementById('gps-text');
+  const t = i18n[lang];
+  if ('geolocation' in navigator) {
+    navigator.geolocation.getCurrentPosition(
+      pos => {
+        const lat = pos.coords.latitude.toFixed(4);
+        const lon = pos.coords.longitude.toFixed(4);
+        gpsText.textContent = `${lat}°N, ${lon}°E`;
+        // Animate pulse
+        const dot = document.getElementById('gps-map-dot');
+        if (dot) {
+          dot.style.fill = '#F03228';
+          setTimeout(() => { if(dot) dot.style.fill = '#247BA0'; }, 1000);
+        }
+      },
+      err => {
+        gpsText.textContent = lang === 'nl' ? 'GPS niet beschikbaar · kaart is schematisch' : 'GPS unavailable · map is schematic';
+      },
+      { timeout: 8000 }
+    );
+  } else {
+    gpsText.textContent = lang === 'nl' ? 'GPS niet ondersteund op dit apparaat' : 'GPS not supported on this device';
+  }
+}
+
+// ==================== NAV ====================
+function setupNav() {
+  document.querySelectorAll('.nav-item').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const scr = btn.dataset.screen;
+      if (scr === activeScreen) return;
+      document.querySelector('.screen.active').classList.remove('active');
+      document.getElementById('screen-' + scr).classList.add('active');
+      document.querySelector('.nav-item.active').classList.remove('active');
+      btn.classList.add('active');
+      activeScreen = scr;
+      if (scr === 'map') requestGPS();
+    });
+  });
+}
+
+// ==================== TOP BAR ====================
+function setupTopBar() {
+  document.getElementById('lang-btn').addEventListener('click', () => {
+    lang = lang === 'nl' ? 'en' : 'nl';
+    applyLang();
+    buildMap();
+  });
+  document.getElementById('theme-btn').addEventListener('click', () => {
+    theme = theme === 'light' ? 'dark' : 'light';
+    document.documentElement.setAttribute('data-theme', theme === 'dark' ? 'dark' : '');
+    document.getElementById('theme-icon').textContent = theme === 'dark' ? 'light_mode' : 'dark_mode';
+    document.getElementById('theme-meta').setAttribute('content', theme === 'dark' ? '#0A0A0A' : '#FFFFFF');
+  });
+}
+
+// ==================== SERVICE WORKER ====================
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/service-worker.js')
+      .then(reg => {
+        console.log('[App] Service Worker geregistreerd:', reg.scope);
+        reg.addEventListener('updatefound', () => {
+          console.log('[App] Nieuwe SW-versie gevonden, downloaden…');
+        });
+      })
+      .catch(err => console.warn('[App] SW registratie mislukt:', err));
+  });
+  navigator.serviceWorker.addEventListener('controllerchange', () => {
+    console.log('[App] Nieuwe service worker actief');
+  });
+}
+async function requestPushPermission() {
+  if (!('Notification' in window)) return;
+  if (Notification.permission !== 'default') return;
+  await Notification.requestPermission();
+}
+setTimeout(requestPushPermission, 5000);
+
+// ==================== INSTALL ====================
+function setupInstall() {
+  window.addEventListener('beforeinstallprompt', e => {
+    e.preventDefault();
+    deferredInstall = e;
+    showInstallBanner();
+  });
+}
+function showInstallBanner() {
+  const wrap = document.getElementById('install-banner-wrap');
+  const t = i18n[lang];
+  wrap.innerHTML = `
+    <div class="install-banner">
+      <span class="material-icons-round" style="color:#fff;font-size:22px">install_mobile</span>
+      <div class="install-banner-text">${t['install-text']}</div>
+      <button class="install-btn" id="do-install">${t['install-btn']}</button>
+    </div>`;
+  document.getElementById('do-install').addEventListener('click', () => {
+    if (deferredInstall) {
+      deferredInstall.prompt();
+      deferredInstall.userChoice.then(() => {
+        wrap.innerHTML = '';
+        deferredInstall = null;
+      });
+    }
+  });
+}
+</script>
+</body>
+</html>

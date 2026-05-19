@@ -1,0 +1,78 @@
+{
+  "name": "❤️U Festival 2026",
+  "short_name": "❤️U Festival",
+  "description": "De officiële app van het ❤️U festival – 15 & 16 augustus 2026, Grasweide Strijkviertel, Utrecht",
+  "start_url": "/heartU-festival-app.html",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#000000",
+  "theme_color": "#000000",
+  "lang": "nl",
+  "categories": ["entertainment", "lifestyle"],
+  "icons": [
+    {
+      "src": "icons/icon-72.png",
+      "sizes": "72x72",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "icons/icon-96.png",
+      "sizes": "96x96",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "icons/icon-128.png",
+      "sizes": "128x128",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable any"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "screenshots/home.png",
+      "sizes": "390x844",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "Home – nieuws en updates"
+    },
+    {
+      "src": "screenshots/schedule.png",
+      "sizes": "390x844",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "Programma – blokkenschema"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Programma",
+      "short_name": "Programma",
+      "description": "Bekijk het festival programma",
+      "url": "/heartU-festival-app.html#schedule",
+      "icons": [{ "src": "icons/icon-96.png", "sizes": "96x96" }]
+    },
+    {
+      "name": "Kaart",
+      "short_name": "Kaart",
+      "description": "Bekijk de festivalkaart",
+      "url": "/heartU-festival-app.html#map",
+      "icons": [{ "src": "icons/icon-96.png", "sizes": "96x96" }]
+    }
+  ],
+  "prefer_related_applications": false
+}

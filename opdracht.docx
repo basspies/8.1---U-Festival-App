@@ -1,0 +1,211 @@
+# 8.1 - Module - ❤️U Festival App - 2026
+
+### Ontwikkel een mobile progressive web app (PWA) voor bezoekers van het ❤️U festival.
+
+# Over het ❤️U festival
+
+- ❤️U is een nieuw tweedaags festival dat wordt georganiseerd voor alle (nieuwe) studenten in de regio Utrecht.
+- ❤️U is een aanvulling op “[De Utrechtse Introductie Tijd (UIT)](https://utrechtseintroductietijd.nl/)” die voor het begin van ieder nieuw schooljaar (van maandag t/m vrijdag) wordt georganiseerd voor aankomende studenten in Utrecht.
+- ❤️U is toegankelijk voor (nieuwe) studenten binnen de regio Utrecht. Tickets (op naam) voor het festival worden uitgereikt via de onderwijsinstelling van de studenten. Het is ook mogelijk tickets te bestellen voor introducees.
+- ❤️U heeft GEEN camping waarop bezoekers kunnen kamperen.
+- ❤️U biedt een diverse programmering met speciale aandacht voor regionaal en nationaal talent op het gebied van muziek, toneel en wetenschap.
+- ❤️U wordt gesponsord door de gemeente Utrecht en opleidingsinstellingen in Utrecht (zoals diverse ROC’s (waaronder het [GLU](https://www.glu.nl/)), de [Hogeschool Utrecht](https://www.hu.nl/) en de [Universiteit van Utrecht](https://www.uu.nl/)).
+- ❤️U biedt mogelijkheden voor studentenclubs om zich te presenteren aan de festivalbezoekers.
+- ❤️U vindt voor het eerst plaats op zaterdag 15 en zondag 16 augustus 2026 (direct na UIT) en maakt gebruik van de locatie ‘[Grasweide Strijkviertel](https://maps.app.goo.gl/HjeNGbATr5yvw3dDA)’ (waar ook het festival [Verknipt](https://www.verknipt.org/festival-2025/) en [Lief](https://www.lieffestival.nl/) plaatsvinden).
+
+# De app
+
+- De organisatoren van ❤️U willen een app laten ontwikkelen die gebruikt kan worden tijdens het festival op de mobieltjes van de bezoekers.
+- De app moet tijdens het festival ‘live’ informatie geven over het programma, de locatie van de bezoeker (op een kaart van het festivalterrein) en moet de bezoeker in staat stellen te interacteren met specifieke festival locaties en andere bezoekers van het festival (DAT IS EEN EXTRA FEATURE), daarbij wordt o.a. gebruik gemaakt van de camera en de microfoon.
+- De app wordt een week voor aanvang van het festival gelanceerd en kan worden geopend door een QR-code te scannen. Daarna kan de app worden geïnstalleerd.
+- Op dit moment heeft de organisatie van het festival de line-up nog niet rond en is ook de indeling van het festival terrein nog niet definitief. Daarnaast staat de organisatie open voor nieuwe ideeën voor de app m.b.t. de interactie via de app met festival locaties en bezoekers en hebben ze hiervoor zelf ook een aantal ideeën die interessant (maar nog niet uitgewerkt) zijn om op te nemen binnen de app.
+- Om er zeker van te zijn dat de app op tijd af is (er is een harde deadline!) wordt de opdracht voor het ontwikkelen van de app nu al aanbesteed, ondanks dat de content en features van de app nog niet volledig concreet en definitief zijn.
+- De organisatie is op zoek naar een partner die een eerste versie van de app voor ze kan ontwikkelen en die daarna de app verder kan door ontwikkelen en updaten met nieuwe informatie en features zodra die beschikbaar en uitgewerkt zijn.
+- De organisatie wil dat er binnen 4 weken een eerste versie van de app wordt opgeleverd.
+- Daarvoor heeft de organisatie een opdrachtomschrijving en content aangeleverd.
+
+# De opdracht
+
+Ontwikkel binnen 4 weken een eerste versie van een mobile PWA die kan worden gebruikt door bezoekers van het festival tijdens het festival op basis van de aangeleverde opdrachtomschrijving en content.
+
+Deze opdrachtomschrijving en content is het uitgangspunt voor het uitwerken van de module.
+
+[Opdrachtomschrijving en content](https://www.notion.so/Opdrachtomschrijving-en-content-00e69bb8092d83658e0001d766d3e2cb?pvs=21)
+
+# Leerdoelen
+
+De voornaamste leerdoelen tijdens deze opdracht zijn:
+
+- je leert hoe je met webtechnologie een mobile app kunt ontwikkelen en wat daarbij van belang is (responsiveness, device features)
+- je leert hoe je een PWA maakt en wat daarbij van belang is (installable, caching, notificaties)
+- je leert hoe je gebruik kunt maken van de Web APIs
+
+Daarnaast leer je ook:
+
+- werken voor een opdrachtgever op basis van een realistische en concrete opdrachtomschrijving
+- een webdev project van het begin tot einde zelfstandig opzetten en afronden
+
+# Mobile Application Development
+
+Tijdens deze module maak je een Mobile App.
+
+Om een beter beeld te krijgen van het Mobile Application Development vakgebied beantwoord je aan het begin van de module een [aantal vragen](https://www.notion.so/Mobile-Application-Development-vragen-41869bb8092d8260b85d811a90ffce8c?pvs=21) waarmee je meer inzicht krijgt in verschillende aspecten van dit vakgebied.
+
+In je eindproduct houdt je rekening met specifieke mobile aspecten zoals :
+
+- responsive & adaptive UI
+- device-features (zoals GPS en camera)
+
+[Mobile Application Development vragen](https://www.notion.so/Mobile-Application-Development-vragen-41869bb8092d8260b85d811a90ffce8c?pvs=21)
+
+# PWA
+
+Voor het maken van de Mobile App gebruik je webtechnologie en ontwikkel je specifiek een PWA.
+
+Aan het begin van de module onderzoek je wat een PWA is en kan. 
+
+Daarnaast onderzoek je hoe je met webtechnologie een PWA kunt maken.
+
+In je eindproduct houdt je rekening met de mogelijkheden van een PWA zoals:
+
+- Installeren op het startscherm
+- Push-meldingen
+- Offline werken (caching)
+
+*Online resources:*
+
+https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps
+https://www.pwabuilder.com/
+https://whatpwacando.today/
+
+# Web APIs
+
+Tijdens het ontwikkelen van de app zijn er tal van Web-API’s beschikbaar. 
+
+Hieronder vind je een link naar een lijst van alle API’s en interfaces (objecttypen) die je mogelijk kunt gebruiken bij het ontwikkelen van je webapp of website.
+
+https://developer.mozilla.org/en-US/docs/Web/API
+
+Web-API’s worden doorgaans gebruikt met JavaScript, hoewel dat niet altijd het geval hoeft te zijn.
+
+Voorbeeld van een Web API is de Geolocation_API waarmee je de positie van de gebruiker kunt bepalen.
+
+https://developer.mozilla.org/en-US/docs/Web/API/Geolocation_API
+
+
+# Opdrachtomschrijving en content
+
+De organisatie heeft de volgende opdrachtomschrijving en content aangeleverd als uitgangspunt voor het uitvoeren van de opdracht. 
+
+De organisatie kan op verzoek een toelichting geven als er onduidelijkheden zijn of aanvullende informatie of content aanleveren.
+
+Op dit moment is de line-up en programmering nog niet definitief en afgerond. Dat geldt ook voor het floorplan. Er is wel een zo realistisch mogelijke invulling van de programmering en het floorplan aangeleverd. Hou er tijdens het ontwikkelen van de app rekening mee dat de programmering en het floorplan in de toekomst eenvoudig moeten kunnen worden aangepast of uitgebreid.
+
+## De app…
+
+- …kan worden gebruikt zonder dat een gebruiker zich hoeft aan te melden of in te loggen.
+- …kan via een QR code worden geïnstalleerd op het device van de gebruiker.
+- …is responsive en werkt goed op mobieltjes met verschillende afmetingen en schermverhoudingen.
+- …is tweetalig (Nederlands en Engels), binnen de app kan op ieder moment de taal worden aangepast via een vlaggetje dat altijd in beeld is.
+- …heeft een light-, darkmode switch.
+- …geeft informatie over het festival.
+- …biedt een interactieve kaart van het festivalterrein inclusief eigen locatie (via GPS).
+- …biedt een interactief blokschema van het festivalprogramma.
+- …kan in de toekomst makkelijk worden aangepast of uitgebreid bij aanpassingen of uitbreidingen m.b.t. de algemene informatie, de line-up, de programmering of het floorplan.
+- …biedt de mogelijkheid om te interacteren met locaties van het festivalterrein en andere bezoekers van het festival. (DIT IS EEN EXTRA “NICE TO HAVE FEATURE” WAARVOOR DE INVULLING NOG NIET BEPAALD IS, MOCHT ER TIJD OVER ZIJN DAN KAN HIER AAN WORDEN GEWERKT)
+
+## Techniek
+
+Keuze voor de techniek is vrij. 
+
+Suggesties om te onderzoeken en te bekijken:
+
+https://dev.to/aaronreddix/how-to-build-progressive-web-apps-pwas-using-laravel-1f6o
+
+https://medium.com/@dlrnjstjs/building-a-react-pwa-creating-a-web-app-that-feels-native-57bd21ec03e5
+
+https://onsen.io/v2/guide/pwa/intro.html
+
+https://alexop.dev/posts/create-pwa-vue3-vite-4-steps/
+
+https://animejs.com/
+
+## Design guidelines
+
+### Logo
+
+png
+
+![logoBlack.png](attachment:e7d417b7-35f5-4fb4-8eaf-c1d5118b564f:logoBlack.png)
+
+![logoWhite.png](attachment:f5cf500a-7b47-4b96-bbeb-5bff163355e2:logoWhite.png)
+
+svg
+
+![logo_white.svg](attachment:cd95cf4e-1b26-46a7-a350-df32ba04cefe:logo_white.svg)
+
+![logo_black.svg](attachment:de7fa0d0-39d6-4e5a-9c14-14b167c74ebe:logo_black.svg)
+
+### Typografie
+
+Voor het festival wordt 1 lettertype gebruikt:
+
+https://fonts.google.com/specimen/Sansation
+
+Voor kopteksten wordt gebruik gemaakt van Bold 700
+Voor leesteksten wordt gebruik gemaakt van Regular 400
+Voor knoppen en andere teksten wordt gebruik gemaakt van Light 300 Italic
+
+Alle teksten moeten goed leesbaar zijn op een mobile device.
+
+### Kleurgebruik
+
+Voor het festival wordt gebruik gemaakt van een kleurenpallet dat bestaat uit 5 kleuren.
+
+- **Accent**: Vermilion - #F03228 - voor knoppen en interactieve onderdelen
+- **Base**: White- #FFFFFF - voor leesteksten of achtergrond (op basis van light- of darkmode)
+- **Primary** : Black - #000000 - voor leesteksten of achtergrond (op basis van light- of darkmode)
+- **Secondary** : Cerulean - #247BA0 - voor kopteksten
+- **Info** : Saffron - #E3B505 - voor informatie of waarschuwingen
+
+![kleuren.png](attachment:f76208ce-ac52-469f-86bb-bc1dbd8acd96:kleuren.png)
+
+### Vormentaal en vormgeving
+
+De vormgeving van het festival is eenvoudige en minimalistisch.
+
+Binnen de app worden knoppen en interactieve elementen minimaal, maar zichtbaar afgerond.
+
+De vormgeving is consistent en sober.
+
+### Icons
+
+Binnen de app kan voor icons gebruik worden gemaakt van:
+
+https://fonts.google.com/icons
+
+### Motion / animation
+
+Binnen de app wordt waar mogelijk gebruik gemaakt van beweging en animatie bij schermwisselingen en interactie.
+
+### Voorbeeld toepassing
+
+![iPhone 14 Pro Max – 1.png](attachment:65395542-d9e7-447e-a640-35c91824b55d:iPhone_14_Pro_Max__1.png)
+
+![iPhone 14 Pro Max – 2.png](attachment:205195d1-b83d-4020-8c92-1bbba11e630d:iPhone_14_Pro_Max__2.png)
+
+![iPhone 14 Pro Max – 3.png](attachment:d3ade7c3-be6a-418b-91b0-7d202fc154c4:iPhone_14_Pro_Max__3.png)
+
+## Wireframes
+
+![wireframe.png](attachment:52933a8b-1e30-4c98-929a-f0ea0395a2e7:wireframe.png)
+
+De app bestaat uit 4 schermen: home, info, schedule, map.
+
+Op het homescherm komen meldingen en nieuws over het festival, tijdens het festival. Die worden in blokjes weergegeven onder elkaar zoals op het wireframe zichtbaar is. De inhoud is nog niet beschikbaar, omdat er nu nog geen nieuws en meldingen zijn.
+
+Op het info scherm komt de aangeleverde info. Hiervoor zou een ‘[accordion](https://getbootstrap.com/docs/5.0/components/accordion/)’ element kunnen worden gebruikt.
+
+Op het schedule scherm komt het interactieve blokkenschema.
+
+Op het map scherm komt de interactieve kaart.
